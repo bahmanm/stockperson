@@ -44,6 +44,16 @@ class RandomHelper {
     r().nextInt(max)
   }
 
+  static Integer genQty(Integer orig, Integer maxPercent) {
+    def diff = (
+      r().nextInt(maxPercent)
+      + r().nextDouble()
+     ) / 100.0
+    new BigDecimal(
+      orig * diff
+    ).setScale(0, RoundingMode.HALF_UP)
+  }
+
   static <T> T pick(List<T> inList) {
     inList.sort(false) { new Random() }[0]
   }
