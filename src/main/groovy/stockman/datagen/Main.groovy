@@ -9,8 +9,12 @@ import stockman.datagen.services.Invoices
 class Main {
 
   static void main(String[] args) {
-    println Products.instance.genProducts().toCsv(true)
-    println Invoices.instance.genInvoices().toCsv(true)
+    new File('products.csv').withWriter {
+      it << Products.instance.genProducts().toCsv(true)
+    }
+    new File('invoices.csv').withWriter {
+      it << Invoices.instance.genInvoices().toCsv(true)
+    }
   }
 
 }
