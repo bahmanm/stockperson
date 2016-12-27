@@ -1,7 +1,7 @@
 package stockman.datagen.services
 
 import stockman.datagen.models.Product
-import static stockman.datagen.services.Utils.*
+import static stockman.datagen.helpers.RandomHelper.*
 
 /**
  * @author Bahman Movaqar <Bahman AT BahmanM.com>
@@ -18,7 +18,7 @@ class Products {
     qty: [
       max: 10_000
     ],
-    count: 5
+    count: 20
   ]
 
   @Delegate(interfaces = false)
@@ -31,7 +31,7 @@ class Products {
 
   Product genProduct() {
     new Product(
-      name: config.name.suffix + genRandomList(
+      name: config.name.suffix + genList(
         config.name.seed, config.name.len
       ).join(''),
       qty: genQty(config.qty.max),
@@ -39,11 +39,14 @@ class Products {
     )
   }
 
-  String toCsv() {
-    'name,qty\n' +
-      products
-        .collect { "${it.name},${it.qty}" }
-        .join('\n')
+  String toCsv(Boolean shuffle=true) {
+    def allAsLines = products.collect { "${it.name},${it.qty},${it.price}" }
+    'name,qty,price\n' +
+    (shuffle ? allAsLines.sort { new Random() } : allAsLines).join('\n')
+  }
+
+  List asType(List) {
+    products
   }
 
 }
