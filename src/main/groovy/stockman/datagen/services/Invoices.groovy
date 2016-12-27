@@ -29,7 +29,7 @@ class Invoices {
     count: 10,
     line: [
       qty: [
-        max: 100
+        maxPercent: 60
       ],
       price: [
         minDiffPercent: 20,
@@ -79,7 +79,7 @@ class Invoices {
     def product = pick(Products.instance as List)
     new InvoiceLine(
       product: product.name,
-      qty: genQty(config.line.qty.max),
+      qty: genQty(product.qty, config.line.qty.maxPercent),
       price: genPrice(
         product.price,
         config.line.price.minDiffPercent,
