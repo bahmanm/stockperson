@@ -1,45 +1,116 @@
-# This config was automatically generated from your source code
-# Stacks detected: deps:java:data-generator,tool:gradle:
+---
 version: 2.1
-jobs:
-  test-java:
+
+####################################################################################################
+
+executors:
+  docker:
+    resource_class: medium
     docker:
-      - image: cimg/openjdk:17.0
-    working_directory: ~/project/data-generator
+      - image: bdockerimg/sdkman:opensuse-tumbleweed
+        environment:
+          LANG: "en_US.UTF-8"
+
+####################################################################################################
+
+jobs:
+
+  build:
+    executor: docker
+    working_directory: ~/stockperson
+
     steps:
+      - run:
+          name: Install the runtime
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
+          command: >-
+            sdk list java
+            | cut -d\| -nf6
+            | sed 's/\s//'
+            | grep '11.*-tem'
+            | sort -r
+            | head -n1 > /tmp/java.version
+            && sdk install java $(</tmp/java.version)
+
       - checkout:
-          path: ~/project
+
       - run:
           name: Calculate cache key
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
           command: >-
-            find . -name 'pom.xml' -o -name 'gradlew*' -o -name '*.gradle*' -o name 'Makefile' 
-            | sort 
+            find . -name 'gradlew*' -o -name '*.gradle*'
+            | sort
             | xargs cat > /tmp/CIRCLECI_CACHE_KEY
+
       - restore_cache:
           key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
+
       - run:
-          command: ./gradlew check
+          name: Build
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
+          command: >-
+            make build
+
       - store_test_results:
           path: build/test-results
+
       - save_cache:
           key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
           paths:
             - ~/.gradle/caches
+
+  test:
+    executor: docker
+    working_directory: ~/stockperson
+
+    steps:
+      - run:
+          name: Install the runtime
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
+          command: >-
+            sdk list java
+            | cut -d\| -nf6
+            | sed 's/\s//'
+            | grep '11.*-tem'
+            | sort -r
+            | head -n1 > /tmp/java.version
+            && sdk install java $(</tmp/java.version)
+
+      - checkout:
+
+      - run:
+          name: Calculate cache key
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
+          command: >-
+            find . -name 'gradlew*' -o -name '*.gradle*'
+            | sort
+            | xargs cat > /tmp/CIRCLECI_CACHE_KEY
+
+      - restore_cache:
+          key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
+
+      - run:
+          name: Test
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
+          command: >-
+            make test
+
+      - save_cache:
+          key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
+          paths:
+            - ~/.gradle/caches
+
+      - store_test_results:
+          path: build/test-results
+
       - store_artifacts:
           path: build/reports
-  deploy:
-    # This is an example deploy job, not actually used by the workflow
-    docker:
-      - image: cimg/base:stable
-    steps:
-      # Replace this with steps to deploy to users
-      - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
+
+
 workflows:
-  build-and-test:
+  test:
     jobs:
-      - test-java
-    # - deploy:
-    #     requires:
-    #       - test-java
+      - build
+      - test:
+          requires:
+            - build
