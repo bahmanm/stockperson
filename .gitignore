@@ -1,14 +1,8 @@
-/.idea
-/target
-*.iml
-*.class
-*.jar
 *~*
 *\#*
 .project
 .classpath
-/build
-/bin
-gradle/
+build/
+bin/
 .gradle/
-.projectile
+target/
