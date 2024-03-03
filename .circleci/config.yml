@@ -32,7 +32,7 @@ jobs:
             | head -n1 > /tmp/java.version
             && sdk install java $(</tmp/java.version)
 
-      - checkout:
+      - checkout
 
       - run:
           name: Calculate cache key
@@ -76,7 +76,7 @@ jobs:
             | head -n1 > /tmp/java.version
             && sdk install java $(</tmp/java.version)
 
-      - checkout:
+      - checkout
 
       - run:
           name: Calculate cache key
@@ -106,9 +106,10 @@ jobs:
       - store_artifacts:
           path: build/reports
 
+####################################################################################################
 
 workflows:
-  test:
+  build_test:
     jobs:
       - build
       - test:
