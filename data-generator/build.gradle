@@ -34,14 +34,20 @@ dependencies {
 apply plugin: 'application'
 apply plugin: 'groovy'
 
-mainClassName = 'stockman.datagen.Main'
-
 repositories {
   mavenCentral()
   jcenter()
 }
 
-dependencies {
-  compile 'org.codehaus.groovy:groovy-all:2.4.7'
-  testCompile 'junit:junit:4.12'
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
 }
+
+dependencies {
+  implementation 'org.codehaus.groovy:groovy-all:2.4.7'
+  testImplementation 'junit:junit:4.12'
+}
+
+mainClassName = 'stockman.datagen.Main'
