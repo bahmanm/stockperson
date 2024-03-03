@@ -1,0 +1,123 @@
+---
+version: 2.1
+
+####################################################################################################
+
+executors:
+  docker:
+    resource_class: medium
+    docker:
+      - image: bdockerimg/sdkman:opensuse-tumbleweed
+        environment:
+          LANG: "en_US.UTF-8"
+
+####################################################################################################
+
+jobs:
+
+  build:
+    executor: docker
+    working_directory: ~/stockperson
+
+    steps:
+      - run:
+          name: Install the runtime
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
+          command: >-
+            sdk list java
+            | cut -d\| -nf6
+            | sed 's/\s//'
+            | grep '11.*-tem'
+            | sort -r
+            | head -n1 > /tmp/java.version
+            && sdk install java $(</tmp/java.version)
+            && zypper --non-interactive refresh
+            && zypper --non-interactive install make perl
+            && rpm --install --nosignature https://github.com/bahmanm/bmakelib/releases/download/v0.7.0/bmakelib-0.7.0-1.1.noarch.rpm
+
+      - checkout
+
+      - run:
+          name: Calculate cache key
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
+          command: >-
+            find . -name 'gradlew*' -o -name '*.gradle*'
+            | sort
+            | xargs cat > /tmp/CIRCLECI_CACHE_KEY
+
+      - restore_cache:
+          key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
+
+      - run:
+          name: Build
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
+          command: >-
+            make build
+
+      - store_test_results:
+          path: build/test-results
+
+      - save_cache:
+          key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
+          paths:
+            - ~/.gradle/caches
+
+  test:
+    executor: docker
+    working_directory: ~/stockperson
+
+    steps:
+      - run:
+          name: Install the runtime
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
+          command: >-
+            sdk list java
+            | cut -d\| -nf6
+            | sed 's/\s//'
+            | grep '11.*-tem'
+            | sort -r
+            | head -n1 > /tmp/java.version
+            && sdk install java $(</tmp/java.version)
+            && zypper --non-interactive refresh
+            && zypper --non-interactive install make perl
+            && rpm --install --nosignature https://github.com/bahmanm/bmakelib/releases/download/v0.7.0/bmakelib-0.7.0-1.1.noarch.rpm
+
+      - checkout
+
+      - run:
+          name: Calculate cache key
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
+          command: >-
+            find . -name 'gradlew*' -o -name '*.gradle*'
+            | sort
+            | xargs cat > /tmp/CIRCLECI_CACHE_KEY
+
+      - restore_cache:
+          key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
+
+      - run:
+          name: Test
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
+          command: >-
+            make test
+
+      - save_cache:
+          key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
+          paths:
+            - ~/.gradle/caches
+
+      - store_test_results:
+          path: build/test-results
+
+      - store_artifacts:
+          path: build/reports
+
+####################################################################################################
+
+workflows:
+  build_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
