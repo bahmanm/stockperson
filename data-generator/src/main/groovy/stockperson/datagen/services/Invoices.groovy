@@ -1,8 +1,8 @@
-package stockman.datagen.services
+package stockperson.datagen.services
 
-import static stockman.datagen.helpers.RandomHelper.*
-import stockman.datagen.models.Invoice
-import stockman.datagen.models.InvoiceLine
+import static stockperson.datagen.helpers.RandomHelper.*
+import stockperson.datagen.models.Invoice
+import stockperson.datagen.models.InvoiceLine
 
 /**
  * @author Bahman Movaqar <Bahman AT BahmanM.com>

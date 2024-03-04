@@ -1,4 +1,3 @@
-# Introduction #
-The dummy data generator used by (all implementations of) Stockman.
+# StockPerson data-generator
 
-**NOTE**: I would NOT recommend using this in any of your own projects unless you have a GOOD reason to.
+The test data generator to be used by implementations of StockPerson.

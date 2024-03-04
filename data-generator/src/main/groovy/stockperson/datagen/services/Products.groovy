@@ -1,7 +1,7 @@
-package stockman.datagen.services
+package stockperson.datagen.services
 
-import stockman.datagen.models.Product
-import static stockman.datagen.helpers.RandomHelper.*
+import stockperson.datagen.models.Product
+import static stockperson.datagen.helpers.RandomHelper.*
 
 /**
  * @author Bahman Movaqar <Bahman AT BahmanM.com>

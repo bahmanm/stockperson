@@ -50,4 +50,4 @@ dependencies {
   testImplementation 'junit:junit:4.12'
 }
 
-mainClassName = 'stockman.datagen.Main'
+mainClassName = 'stockperson.datagen.Main'
