@@ -3,6 +3,8 @@
 A collection of exercises that you can use to learn a new programming language, or even revisit a
 language you're already familiar with.
 
+<img alt="StockPerson logo" src="https://imgur.com/Df344bg.png" style="height: 300px; width: 300px; vertical-align: top" /> 
+
 * The exercises are grouped in chapters.
 * There are no inter-dependency between chapters.
 * Each chapter is noticeably more involved and complex than its predecessor.
