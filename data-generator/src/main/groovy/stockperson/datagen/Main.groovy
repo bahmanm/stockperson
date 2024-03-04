@@ -1,7 +1,7 @@
-package stockman.datagen
+package stockperson.datagen
 
-import stockman.datagen.services.Products
-import stockman.datagen.services.Invoices
+import stockperson.datagen.services.Products
+import stockperson.datagen.services.Invoices
 
 /**
  * @author Bahman Movaqar <Bahman AT BahmanM.com>

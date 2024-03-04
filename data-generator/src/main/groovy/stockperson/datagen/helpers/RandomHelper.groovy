@@ -1,4 +1,4 @@
-package stockman.datagen.helpers
+package stockperson.datagen.helpers
 
 import java.math.*
 

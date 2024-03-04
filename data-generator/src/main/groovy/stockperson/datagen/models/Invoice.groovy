@@ -1,4 +1,4 @@
-package stockman.datagen.models
+package stockperson.datagen.models
 
 /**
  * @author Bahman Movaqar <Bahman AT BahmanM.com>
