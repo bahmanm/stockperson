@@ -1,4 +1,4 @@
-# StockPerson
+# StockPerson [![CircleCI](https://dl.circleci.com/status-badge/img/circleci/UMKeFZ8ns9T9vi5aquTfVT/SMpnX4zqrRqMcDN3Lsw3Wv/tree/main.svg?style=shield&circle-token=9e1ebe32944ff6e34c4f422aece05cd7c16a5654)](https://dl.circleci.com/status-badge/redirect/circleci/UMKeFZ8ns9T9vi5aquTfVT/SMpnX4zqrRqMcDN3Lsw3Wv/tree/main)
 
 A collection of exercises that you can use to learn a new programming language, or even revisit a
 language you're already familiar with.
