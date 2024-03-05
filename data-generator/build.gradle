@@ -46,8 +46,8 @@ java {
 }
 
 dependencies {
-  implementation 'org.codehaus.groovy:groovy-all:2.4.7'
-  testImplementation 'junit:junit:4.12'
+  implementation 'org.codehaus.groovy:groovy-all:2.5.23'
+  testImplementation 'junit:junit:4.13.2'
 }
 
 mainClassName = 'stockperson.datagen.Main'
