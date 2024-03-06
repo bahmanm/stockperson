@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU General Public License
  * along with StockPerson DataGenerator. If not, see <https://www.gnu.org/licenses/>.
  */
-package stockperson.datagen
+package stockperson.datagenerator
 
-import stockperson.datagen.services.Invoices
-import stockperson.datagen.services.Products
+import stockperson.datagenerator.services.Invoices
+import stockperson.datagenerator.services.Products
 
 /**
  * @author Bahman Movaqar <Bahman AT BahmanM.com>

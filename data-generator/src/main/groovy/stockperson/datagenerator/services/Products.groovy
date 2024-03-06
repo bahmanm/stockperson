@@ -16,11 +16,11 @@
  * You should have received a copy of the GNU General Public License
  * along with StockPerson DataGenerator. If not, see <https://www.gnu.org/licenses/>.
  */
-package stockperson.datagen.services
+package stockperson.datagenerator.services
 
-import static stockperson.datagen.helpers.RandomHelper.*
+import static stockperson.datagenerator.helpers.RandomHelper.*
 
-import stockperson.datagen.models.Product
+import stockperson.datagenerator.models.Product
 
 /**
  * @author Bahman Movaqar <Bahman AT BahmanM.com>

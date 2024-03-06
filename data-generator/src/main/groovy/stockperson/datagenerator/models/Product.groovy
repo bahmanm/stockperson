@@ -16,15 +16,14 @@
  * You should have received a copy of the GNU General Public License
  * along with StockPerson DataGenerator. If not, see <https://www.gnu.org/licenses/>.
  */
-package stockperson.datagen.models
+package stockperson.datagenerator.models
 
 /**
  * @author Bahman Movaqar <Bahman AT BahmanM.com>
  */
-class InvoiceLine {
+class Product {
 
-	Integer lineNo
-	String product
+	String name
 	Integer qty
 	BigDecimal price
 }
