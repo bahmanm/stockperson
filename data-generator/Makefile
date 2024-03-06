@@ -16,14 +16,14 @@ data-generator.gradle(%) :
 
 .PHONY : data-generator.build
 
-data-generator.build : data-generator.gradle( spotlessApply spotlessGroovyGradleApply spotlessMiscApply )
+data-generator.build : data-generator.gradle( spotlessApply spotlessGroovyGradleApply )
 data-generator.build : data-generator.gradle( classes testClasses )
 
 ####################################################################################################
 
 .PHONY : data-generator.test
 
-data-generator.test : data-generator.gradle( spotlessCheck spotlessGroovyGradleCheck spotlessMiscCheck )
+data-generator.test : data-generator.gradle( spotlessCheck spotlessGroovyGradleCheck )
 data-generator.test : data-generator.gradle( check )
 
 ####################################################################################################
