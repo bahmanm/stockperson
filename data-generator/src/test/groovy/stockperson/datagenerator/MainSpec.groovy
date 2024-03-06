@@ -16,6 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with StockPerson DataGenerator. If not, see <https://www.gnu.org/licenses/>.
  */
+package stockperson.datagenerator
+
 import spock.lang.*
 
 class MainSpec extends Specification {
