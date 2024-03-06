@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) Bahman Movaqar and contributors
+ *
  * This file is part of StockPerson DataGenerator.
  *
  * StockPerson DataGenerator is free software: you can redistribute it and/or modify it

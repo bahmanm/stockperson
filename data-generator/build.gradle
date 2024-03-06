@@ -1,57 +1,76 @@
-// -*- mode: groovy; -*-
+/*
+ * Copyright (c) Bahman Movaqar and contributors
+ *
+ * This file is part of StockPerson DataGenerator.
+ *
+ * StockPerson DataGenerator is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * StockPerson DataGenerator is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with StockPerson DataGenerator. If not, see <https://www.gnu.org/licenses/>.
+ */
 
 plugins {
-    id 'application'
-    id 'groovy'
-    id 'com.diffplug.spotless' version '6.25.0'
+	id 'application'
+	id 'groovy'
+	id 'com.diffplug.spotless' version '6.25.0'
 }
 
 repositories {
-    mavenCentral()
+	mavenCentral()
 }
 
 application {
-    mainClass = 'stockperson.datagenerator.Main'
+	mainClass = 'stockperson.datagenerator.Main'
 }
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
-    }
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(11)
+	}
 }
 
 dependencies {
-    implementation platform('org.apache.groovy:groovy-bom:4.0.19')
-    implementation 'org.apache.groovy:groovy'
+	implementation platform('org.apache.groovy:groovy-bom:4.0.19')
+	implementation 'org.apache.groovy:groovy'
 
-    testImplementation platform('org.spockframework:spock-bom:2.3-groovy-4.0')
-    testImplementation 'org.spockframework:spock-core'
+	testImplementation platform('org.spockframework:spock-bom:2.3-groovy-4.0')
+	testImplementation 'org.spockframework:spock-core'
 }
 
 test {
-    useJUnitPlatform()
-    testLogging {
-        events 'passed', 'skipped', 'failed'
-    }
+	useJUnitPlatform()
+	testLogging {
+		events 'passed', 'skipped', 'failed'
+	}
 }
 
 
 spotless {
-    encoding 'UTF-8'
-    lineEndings 'UNIX'
-    format 'misc', {
-        target '*.gradle', '.gitignore'
-        trimTrailingWhitespace()
-        indentWithSpaces()
-        endWithNewline()
-    }
-    groovy {
-        greclipse()
-        endWithNewline()
-        importOrder()
-        removeSemicolons()
-        excludeJava()
-        licenseHeader '''/*
+	encoding 'UTF-8'
+	lineEndings 'UNIX'
+	format 'misc', {
+		target '*.md', '.gitignore'
+		trimTrailingWhitespace()
+		indentWithSpaces()
+		endWithNewline()
+	}
+	groovy {
+		greclipse()
+		endWithNewline()
+		importOrder()
+		removeSemicolons()
+		excludeJava()
+	licenseHeader '''/*
+ * Copyright (c) Bahman Movaqar and contributors
+ *
  * This file is part of StockPerson DataGenerator.
  *
  * StockPerson DataGenerator is free software: you can redistribute it and/or modify it
@@ -68,9 +87,11 @@ spotless {
  * along with StockPerson DataGenerator. If not, see <https://www.gnu.org/licenses/>.
  */
 '''
-    }
-    groovyGradle {
-        target '*.gradle'
-        greclipse()
+	}
+	groovyGradle {
+		target '*.gradle'
+		endWithNewline()
+		importOrder()
+		removeSemicolons()
     }
 }
