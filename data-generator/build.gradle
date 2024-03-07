@@ -63,7 +63,7 @@ spotless {
 		endWithNewline()
 	}
 	groovy {
-		greclipse()
+	greclipse().configFile('greclipse-formatter.xml')
 		endWithNewline()
 		importOrder()
 		removeSemicolons()
