@@ -23,7 +23,7 @@ import stockperson.datagenerator.chapter_1_0.Helpers.*
 
 class HelpersSpec extends Specification {
 
-  def 'Random.anInt'(def lowerBound, def upperBound) {
+  def 'RandomNumber.anInt'(def lowerBound, def upperBound) {
     expect:
     RandomNumber.instance.anInt(lowerBound, upperBound) < upperBound
     RandomNumber.instance.anInt(lowerBound, upperBound) >= lowerBound
@@ -39,7 +39,7 @@ class HelpersSpec extends Specification {
     ]
   }
 
-  def 'Random.aBigDecimal'(def lowerBound, def upperBound) {
+  def 'RandomNumber.aBigDecimal'(def lowerBound, def upperBound) {
     expect:
     RandomNumber.instance.aBigDecimal(lowerBound, upperBound) < upperBound
     RandomNumber.instance.aBigDecimal(lowerBound, upperBound) >= lowerBound
@@ -59,5 +59,29 @@ class HelpersSpec extends Specification {
       200_000.0,
       1_900_999.0
     ]
+  }
+
+  def 'RandomString.alphanumeric'(def str, def minLen, def maxLen) {
+    expect:
+    str =~ /[\da-zA-Z]+/
+    str.length() >= minLen
+    str.length() < maxLen
+
+    where:
+    minLen = 5
+    maxLen = 18
+    str = RandomString.instance.alphanumeric(minLen, maxLen)
+  }
+
+  def 'RandomString.alphabetic'(def str) {
+    expect:
+    str =~ /[a-zA-Z]+/
+    str.length() >= minLen
+    str.length() < maxLen
+
+    where:
+    minLen = 5
+    maxLen = 18
+    str = RandomString.instance.alphabetic(minLen, maxLen)
   }
 }

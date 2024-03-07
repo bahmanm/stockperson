@@ -18,6 +18,8 @@
  */
 package stockperson.datagenerator.chapter_1_0
 
+import org.apache.commons.lang3.RandomStringUtils as Commons
+
 @Singleton
 class RandomNumber {
 
@@ -29,5 +31,24 @@ class RandomNumber {
 
   BigDecimal aBigDecimal(BigDecimal fromInclusive = 0.0, BigDecimal toExclusive = 1_000_000.0) {
     rand.doubles(fromInclusive, toExclusive).findFirst().getAsDouble() as BigDecimal
+  }
+}
+
+@Singleton
+class RandomString {
+
+  String alphanumeric(Integer minLengthInclusive = 1, Integer maxLengthExclusive = 10) {
+    Commons.randomAlphanumeric(minLengthInclusive, maxLengthExclusive)
+  }
+
+  String alphabetic(Integer minLengthInclusive = 1, Integer maxLengthExclusive = 10) {
+    Commons.randomAlphabetic(minLengthInclusive, maxLengthExclusive)
+  }
+
+  String words(Integer minCountInclusive = 1, Integer maxCountExclusive = 12) {
+    def nWords = RandomNumber.anInt(minCountInclusive, maxCountExclusive)
+    (0..nWords).collect {
+      alphabetic(3, 12)
+    }.join(' ')
   }
 }
