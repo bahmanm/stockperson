@@ -21,12 +21,12 @@ package stockperson.datagenerator
 import spock.lang.*
 
 class MainSpec extends Specification {
-	def 'Works OK'() {
-		expect:
-		Main.dummyMethod(x) == y
+  def 'Works OK'() {
+    expect:
+    Main.dummyMethod(x) == y
 
-		where:
-		x << [1, 5, 10]
-		y << [1, 25, 100]
-	}
+    where:
+    x << [1, 5, 10]
+    y << [1, 25, 100]
+  }
 }

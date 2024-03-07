@@ -23,12 +23,12 @@ package stockperson.datagenerator.models
  */
 class Invoice {
 
-	String docNo
-	Date date
-	String customer
-	List<InvoiceLine> lines
+  String docNo
+  Date date
+  String customer
+  List<InvoiceLine> lines
 
-	BigDecimal getTotal() {
-		lines?.reduce(0.0) { sum, line -> sum + line.price }
-	}
+  BigDecimal getTotal() {
+    lines?.reduce(0.0) { sum, line -> sum + line.price }
+  }
 }

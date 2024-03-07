@@ -23,7 +23,7 @@ package stockperson.datagenerator.models
  */
 class Product {
 
-	String name
-	Integer qty
-	BigDecimal price
+  String name
+  Integer qty
+  BigDecimal price
 }

@@ -23,8 +23,8 @@ package stockperson.datagenerator.models
  */
 class InvoiceLine {
 
-	Integer lineNo
-	String product
-	Integer qty
-	BigDecimal price
+  Integer lineNo
+  String product
+  Integer qty
+  BigDecimal price
 }

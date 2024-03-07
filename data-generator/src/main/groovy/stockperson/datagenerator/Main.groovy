@@ -26,16 +26,16 @@ import stockperson.datagenerator.services.Products
  */
 class Main {
 
-	static Integer dummyMethod(Integer i) {
-		i * i
-	}
+  static Integer dummyMethod(Integer i) {
+    i * i
+  }
 
-	static void main(String[] args) {
-		new File('products.csv').withWriter {
-			it << Products.instance.genProducts().toCsv(true)
-		}
-		new File('invoices.csv').withWriter {
-			it << Invoices.instance.genInvoices().toCsv(true)
-		}
-	}
+  static void main(String[] args) {
+    new File('products.csv').withWriter {
+      it << Products.instance.genProducts().toCsv(true)
+    }
+    new File('invoices.csv').withWriter {
+      it << Invoices.instance.genInvoices().toCsv(true)
+    }
+  }
 }
