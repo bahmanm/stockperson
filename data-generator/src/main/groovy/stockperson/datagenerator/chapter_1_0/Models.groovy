@@ -18,12 +18,14 @@
  */
 package stockperson.datagenerator.chapter_1_0
 
+import groovy.transform.EqualsAndHashCode
 import groovy.transform.TupleConstructor
 
 /**
  * A sales invoice.
  */
 @TupleConstructor
+@EqualsAndHashCode(excludes = ['date', 'discount', 'lines'])
 class Invoice {
 
   String docNo
@@ -58,6 +60,7 @@ class Invoice {
  * A line in a sales invoice.
  */
 @TupleConstructor
+@EqualsAndHashCode(excludes = ['qty'])
 class InvoiceLine {
 
   Integer lineNo
@@ -73,6 +76,7 @@ class InvoiceLine {
  * A product.
  */
 @TupleConstructor
+@EqualsAndHashCode(excludes = ['price'])
 class Product {
 
   String name
