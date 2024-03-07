@@ -52,3 +52,16 @@ class RandomString {
     }.join(' ')
   }
 }
+
+@Singleton
+class RandomList {
+
+  List subList(List parent) {
+    def len = RandomNumber.instance.anInt(1, parent.size())
+    parent.shuffled()[0..len]
+  }
+
+  List subList(List parent, length) {
+    parent.shuffled()[0..length]
+  }
+}

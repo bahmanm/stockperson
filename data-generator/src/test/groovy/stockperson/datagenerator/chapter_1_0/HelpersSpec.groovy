@@ -84,4 +84,27 @@ class HelpersSpec extends Specification {
     maxLen = 18
     str = RandomString.instance.alphabetic(minLen, maxLen)
   }
+
+  def 'RandomList.subList'(def list, def sublist) {
+    expect:
+    sublist.size() <= list.size()
+    sublist.size() > 0
+    sublist.every { e -> e in list }
+
+    where:
+    list = (1..100)
+    sublist = RandomList.instance.subList(list)
+  }
+
+  def 'RandomList.subList'(def list, def sublist, def length) {
+    expect:
+    sublist.size() <= list.size()
+    sublist.size() == length + 1
+    sublist.every { e -> e in list }
+
+    where:
+    list = (1..100)
+    length = RandomNumber.instance.anInt(0, 100)
+    sublist = RandomList.instance.subList(list, length)
+  }
 }
