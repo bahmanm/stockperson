@@ -62,6 +62,7 @@ class Main {
     invoiceFile << '# docNo,customer,date,total,discount,lineNo,product,qty,price,lineAmt\n'
     invoices.each { inv ->
       invoiceFile << InvoiceService.instance.toCsv(inv).join('\n')
+      invoiceFile << '\n'
     }
     invoiceFile << '\n'
   }
