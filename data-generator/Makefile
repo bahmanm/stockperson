@@ -55,5 +55,5 @@ data-generator.clean :
 .PHONY : data-generator.run
 
 data-generator.run : export SP_MAIN_CLASS = stockperson.datagenerator.chapter_1_0.Main
-data-generator.run : data-generator.gradle.user-options := --invoice-count=5
+data-generator.run : data-generator.gradle.user-options ?=
 data-generator.run : data-generator.gradle( run )
