@@ -33,16 +33,15 @@ class ProductService {
     new Product(name: name, price: price)
   }
 
-  List<Product> make(Integer minCountInclusive, Integer maxCountExclusive) {
-    int count = RandomNumber.instance.anInt(minCountInclusive, maxCountExclusive)
+  List<Product> make(Integer count) {
     def result = (1..count).collect {
       make()
     }.unique()
 
-    if (result.size() >= minCountInclusive)
+    if (result.size() == count)
       result
     else
-      result + make(minCountInclusive, count - result.size())
+      result + make(count - result.size())
   }
 }
 
@@ -54,12 +53,12 @@ class InvoiceService {
 
   Invoice make(List<Product> allProducts, List<String> customers) {
     new Invoice(
-      docNo: RandomString.instance.alphanumeric(6, 7),
-      date: new Date(),
-      customer: RandomList.instance.subList(customers, 1)[0],
-      discount: RandomNumber.instance.aBigDecimal(0, 75),
-      lines: makeLines(allProducts)
-    )
+        docNo: RandomString.instance.alphanumeric(6, 7),
+        date: new Date() + RandomNumber.instance.anInt(-1000, 1),
+        customer: RandomList.instance.subList(customers, 1)[0],
+        discount: RandomNumber.instance.aBigDecimal(0, 75),
+        lines: makeLines(allProducts)
+        )
   }
 
   List<Invoice> make(List<Product> allProducts, List<String> customers, Integer count) {
@@ -86,13 +85,13 @@ class InvoiceService {
       [
         invoice.docNo,
         invoice.customer,
-        invoice.date,
-        invoice.total,
-        invoice.discount,
+        invoice.date.format('yyyy-MM-dd'),
+        invoice.total.setScale(2, BigDecimal.ROUND_DOWN),
+        invoice.discount.setScale(2, BigDecimal.ROUND_DOWN),
         line.lineNo,
         line.product?.name,
         line.qty,
-        line.product?.price,
+        line.product?.price.setScale(2, BigDecimal.ROUND_DOWN),
         line.lineAmt
       ].join(',')
     }

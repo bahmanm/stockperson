@@ -27,12 +27,11 @@ class ServicesSpec extends Specification {
 
   def 'ProductService.make'() {
     given:
-    def minCount = 10
-    def maxCount = 50
-    def products = ProductService.instance.make(minCount, maxCount)
+    def count = RandomNumber.instance.anInt(10, 100)
+    def products = ProductService.instance.make(count)
 
     expect:
-    products.size() < maxCount && products.size() >= minCount
+    products.size() == count
     products == products.toUnique { p1, p2 ->
       p1.name <=> p2.name
     }
@@ -40,7 +39,7 @@ class ServicesSpec extends Specification {
 
   def 'InvoiceService.make single'() {
     given:
-    def products = ProductService.instance.make(1, 100)
+    def products = ProductService.instance.make(RandomNumber.instance.anInt(10, 100))
     def customers = (0..10).collect { RandomString.instance.alphabetic(3, 8) }
     def invoice = InvoiceService.instance.make(products, customers)
 
@@ -53,7 +52,7 @@ class ServicesSpec extends Specification {
   def 'InvoiceService.make list'() {
     given:
     def count = RandomNumber.instance.anInt(5, 50)
-    def products = ProductService.instance.make(1, 100)
+    def products = ProductService.instance.make(count)
     def customers = (0..10).collect { RandomString.instance.alphabetic(3, 8) }
     def invoices = InvoiceService.instance.make(products, customers, count)
 
