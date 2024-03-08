@@ -8,9 +8,11 @@ data-generator.gradle.command = $(data-generator.gradle.gradle) $(data-generator
 
 ####################################################################################################
 
+data-generator.gradle(%) : bmakelib.default-if-blank( data-generator.gradle.user-options, )
 data-generator.gradle(%) :
 	cd $(data-generator.root.dir) \
-	&& $(data-generator.gradle.command) $(*)
+	&& $(data-generator.gradle.command) $(*) \
+	$(if $(data-generator.gradle.user-options),--args='$(data-generator.gradle.user-options)',)
 
 ####################################################################################################
 
@@ -49,3 +51,9 @@ data-generator.clean :
 	-@rm -rf $(data-generator.root.dir)build
 
 ####################################################################################################
+
+.PHONY : data-generator.run
+
+data-generator.run : export SP_MAIN_CLASS = stockperson.datagenerator.chapter_1_0.Main
+data-generator.run : data-generator.gradle.user-options := --invoice-count=5
+data-generator.run : data-generator.gradle( run )
