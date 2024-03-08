@@ -57,3 +57,10 @@ data-generator.clean :
 data-generator.run : export SP_MAIN_CLASS = stockperson.datagenerator.chapter_1_0.Main
 data-generator.run : data-generator.gradle.user-options ?=
 data-generator.run : data-generator.gradle( run )
+
+####################################################################################################
+
+.PHONY : data-generator.package
+
+data-generator.package : data-generator.test
+data-generator.package : data-generator.gradle( assemble )
