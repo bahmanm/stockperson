@@ -54,12 +54,12 @@ class InvoiceService {
 
   Invoice make(List<Product> allProducts, List<String> customers) {
     new Invoice(
-        docNo: RandomString.instance.alphanumeric(6, 7),
-        date: new Date(),
-        customer: RandomList.instance.subList(customers, 1)[0],
-        discount: RandomNumber.instance.aBigDecimal(0, 75),
-        lines: makeLines(allProducts)
-        )
+      docNo: RandomString.instance.alphanumeric(6, 7),
+      date: new Date(),
+      customer: RandomList.instance.subList(customers, 1)[0],
+      discount: RandomNumber.instance.aBigDecimal(0, 75),
+      lines: makeLines(allProducts)
+    )
   }
 
   List<Invoice> make(List<Product> allProducts, List<String> customers, Integer count) {
@@ -78,6 +78,23 @@ class InvoiceService {
     def products = RandomList.instance.subList(allProducts, count)
     (0..count).collect { i ->
       new InvoiceLine(lineNo: i+1, product: products[i], qty: RandomNumber.instance.anInt(1, 1000))
+    }
+  }
+
+  List<String> toCsv(Invoice invoice) {
+    invoice.lines.collect { line ->
+      [
+        invoice.docNo,
+        invoice.customer,
+        invoice.date,
+        invoice.total,
+        invoice.discount,
+        line.lineNo,
+        line.product?.name,
+        line.qty,
+        line.product?.price,
+        line.lineAmt
+      ].join(',')
     }
   }
 }

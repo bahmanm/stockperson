@@ -37,23 +37,6 @@ class Invoice {
   BigDecimal getTotal() {
     lines*.lineAmt.sum() * ((100.0 - discount) / 100.0)
   }
-
-  List<String> toCsvRows() {
-    lines.collect { line ->
-      [
-        docNo,
-        customer,
-        date,
-        total,
-        discount,
-        line.lineNo,
-        line.product?.name,
-        line.qty,
-        line.product?.price,
-        line.lineAmt
-      ].join(',')
-    }
-  }
 }
 
 /**
