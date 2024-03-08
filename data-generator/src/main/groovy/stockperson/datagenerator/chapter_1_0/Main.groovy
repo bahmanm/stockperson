@@ -32,9 +32,9 @@ class Main {
         usage: 'Main [OPTION1] [OPTION2] ...'
         )
     cli._(longOpt: 'invoice-count', args: 1, argName: 'N', required: false,
-          'How many invoices to generate?')
+    'How many invoices to generate?')
     cli._(longOpt: 'invoice-file', args: 1, argName: 'file', required: false,
-          'Path (absolute or relative) to the invoices file.')
+    'Path (absolute or relative) to the invoices file.')
     cli.h(longOpt: 'help', args: 0, required: false, 'Show this help.')
   }
 
