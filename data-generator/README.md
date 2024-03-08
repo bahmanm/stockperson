@@ -12,7 +12,7 @@ The test data generator to be used by implementations of StockPerson.
 
 Download the latest release from the [release page](https://github.com/bahmanm/stockperson/releases) on the repository and extract it.
 
-For example: 
+For example:
 
 ```
 ＄ URL='https://github.com/bahmanm/stockperson/releases/download/v0.1.0/data-generator.tar'
