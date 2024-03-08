@@ -73,7 +73,7 @@ class InvoiceService {
   }
 
   List<InvoiceLine> makeLines(List<Product> allProducts) {
-    def count = RandomNumber.instance.anInt(1, allProducts.size())
+    def count = RandomNumber.instance.anInt(1, Math.min(20, (allProducts.size() / 2) as Integer))
     def products = RandomList.instance.subList(allProducts, count)
     (0..count).collect { i ->
       new InvoiceLine(lineNo: i+1, product: products[i], qty: RandomNumber.instance.anInt(1, 1000))
