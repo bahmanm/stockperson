@@ -19,6 +19,7 @@
 package stockperson.datagenerator.chapter_1_0
 
 import spock.lang.*
+import stockperson.datagenerator.chapter_1_0.Helpers.*
 import stockperson.datagenerator.chapter_1_0.Models.*
 import stockperson.datagenerator.chapter_1_0.Services.*
 
@@ -35,5 +36,31 @@ class ServicesSpec extends Specification {
     products == products.toUnique { p1, p2 ->
       p1.name <=> p2.name
     }
+  }
+
+  def 'InvoiceService.make single'() {
+    given:
+    def products = ProductService.instance.make(1, 100)
+    def customers = (0..10).collect { RandomString.instance.alphabetic(3, 8) }
+    def invoice = InvoiceService.instance.make(products, customers)
+
+    expect:
+    invoice.customer in customers
+    !invoice.lines.empty
+    invoice.lines*.product.every { p -> p in products }
+  }
+
+  def 'InvoiceService.make list'() {
+    given:
+    def count = RandomNumber.instance.anInt(5, 50)
+    def products = ProductService.instance.make(1, 100)
+    def customers = (0..10).collect { RandomString.instance.alphabetic(3, 8) }
+    def invoices = InvoiceService.instance.make(products, customers, count)
+
+    expect:
+    invoices.size() == count
+    invoices*.customer.every { c -> c in customers }
+    invoices*.lines.every { lines -> !lines.empty }
+    invoices*.lines*.product.flatten().every { p -> p in products }
   }
 }

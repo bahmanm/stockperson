@@ -21,6 +21,9 @@ package stockperson.datagenerator.chapter_1_0
 import stockperson.datagenerator.chapter_1_0.Helpers.*
 import stockperson.datagenerator.chapter_1_0.Models.*
 
+/**
+ * A service to generate instances of Product.
+ */
 @Singleton
 class ProductService {
 
@@ -32,14 +35,49 @@ class ProductService {
 
   List<Product> make(Integer minCountInclusive, Integer maxCountExclusive) {
     int count = RandomNumber.instance.anInt(minCountInclusive, maxCountExclusive)
-    def result = (0..count).collect {
+    def result = (1..count).collect {
       make()
-    }.toUnique { p1, p2 ->
-      p1.name <=> p2.name
-    }
+    }.unique()
+
     if (result.size() >= minCountInclusive)
       result
     else
       result + make(minCountInclusive, count - result.size())
+  }
+}
+
+/**
+ * A service to generate invoices.
+ */
+@Singleton
+class InvoiceService {
+
+  Invoice make(List<Product> allProducts, List<String> customers) {
+    new Invoice(
+        docNo: RandomString.instance.alphanumeric(6, 7),
+        date: new Date(),
+        customer: RandomList.instance.subList(customers, 1)[0],
+        discount: RandomNumber.instance.aBigDecimal(0, 75),
+        lines: makeLines(allProducts)
+        )
+  }
+
+  List<Invoice> make(List<Product> allProducts, List<String> customers, Integer count) {
+    def result = (1..count).collect {
+      make(allProducts, customers)
+    }.unique()
+
+    if (result.size() >= count)
+      result
+    else
+      result + make(allProducts, customers, count - result.size())
+  }
+
+  List<InvoiceLine> makeLines(List<Product> allProducts) {
+    def count = RandomNumber.instance.anInt(1, allProducts.size())
+    def products = RandomList.instance.subList(allProducts, count)
+    (0..count).collect { i ->
+      new InvoiceLine(lineNo: i+1, product: products[i], qty: RandomNumber.instance.anInt(1, 1000))
+    }
   }
 }
