@@ -16,15 +16,52 @@
  * You should have received a copy of the GNU General Public License
  * along with StockPerson DataGenerator. If not, see <https://www.gnu.org/licenses/>.
  */
-package stockperson.datagenerator.models
+package stockperson.datagenerator.chapter_1_0
+
+import groovy.transform.EqualsAndHashCode
+import groovy.transform.TupleConstructor
 
 /**
- * @author Bahman Movaqar <Bahman AT BahmanM.com>
+ * A sales invoice.
  */
+@TupleConstructor
+@EqualsAndHashCode(excludes = ['date', 'discount', 'lines'])
+class Invoice {
+
+  String docNo
+  Date date
+  String customer
+  BigDecimal discount
+  List<InvoiceLine> lines
+
+  BigDecimal getTotal() {
+    lines*.lineAmt.sum() * ((100.0 - discount) / 100.0)
+  }
+}
+
+/**
+ * A line in a sales invoice.
+ */
+@TupleConstructor
+@EqualsAndHashCode(excludes = ['qty'])
 class InvoiceLine {
 
-	Integer lineNo
-	String product
-	Integer qty
-	BigDecimal price
+  Integer lineNo
+  Product product
+  Integer qty
+
+  BigDecimal getLineAmt() {
+    product.price * qty
+  }
+}
+
+/**
+ * A product.
+ */
+@TupleConstructor
+@EqualsAndHashCode(excludes = ['price'])
+class Product {
+
+  String name
+  BigDecimal price
 }
