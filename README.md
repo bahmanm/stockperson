@@ -25,7 +25,7 @@ The idea that **I** follow when using StockPerson is to assume I'm a contractor 
 There are usually 2 approaches to working on a chapter:
 
 * Focusing on the end-user functionality and do only as much as technically required to tackle **just** the current chapter.
-* For each chapter, try to implement a robust design with the idea of reusing the code in the future chapters.
+* Focusing on trying to implement a robust design with the idea of reusing the code in the future chapters.
 
 Either approach works just fine for the purpose of StockPerson and it's mostly a matter of personal preference.
 
@@ -35,6 +35,9 @@ Either approach works just fine for the purpose of StockPerson and it's mostly a
 
 1. Read a CSV file that contains sales invoice lines.
 2. Pretty-print the invoices in a document style.
+
+> [!NOTE]
+> If you don't what exactly "pretty-print" entails, you take a look at an example [here.](./assets/prettyprint_example.txt)
 
 ### 📗 Chapter 2.0
 
@@ -87,7 +90,9 @@ Either approach works just fine for the purpose of StockPerson and it's mostly a
 
 ## Sample Data
 
-_TBD_
+[Chapter 1](./sample-data/chapter-1.0/)
+
+_More sample data to be pre-generated._
 
 ## Trivia
 
