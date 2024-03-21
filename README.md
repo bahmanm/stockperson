@@ -59,8 +59,8 @@ Either approach works just fine for the purpose of StockPerson and it's mostly a
 1. Read a CSV file that contains product inventory.
 2. Read a CSV file that contains sales invoice lines.
 3. Check if the product referenced on each line has enough inventory.
-	1. If no, do not import the invoice to which the line belongs.
-	2. If yes, import the invoice line and update the inventory of the product accordingly.
+  1. If no, do not import the invoice to which the line belongs.
+  2. If yes, import the invoice line and update the inventory of the product accordingly.
 4. Print a list of invoices listing the problematic line(s) for each invoice.
 
 ### 📗 Chapter 4.0
@@ -71,8 +71,8 @@ Either approach works just fine for the purpose of StockPerson and it's mostly a
 1. Read a CSV file that contains product inventory.
 2. Read a CSV file that contains sales invoice lines, where each invoice has a timestamp denoting the transaction date and time.
 3. Check if the product referenced on each line has enough inventory.
-	1. If no, do not import the invoice to which the line belongs.
-	2. If yes, import the invoice line and update the inventory of the product accordingly.
+  1. If no, do not import the invoice to which the line belongs.
+  2. If yes, import the invoice line and update the inventory of the product accordingly.
 4. Print a list of invoices listing the problematic line(s) for each invoice.
 
 ### 📗 Chapter 5.0
@@ -81,11 +81,10 @@ Either approach works just fine for the purpose of StockPerson and it's mostly a
 > It is important to process any given invoice only once all the other invoices (sales and purchase) with earlier timestamps have been processed.
 
 1. Read a CSV file that contains product inventory.
-2. Read two CSV files, one containing sales invoice lines and the other containing purchase invoice lines.
-	lines. Each invoice has a timestamp which denotes the transaction date and time.
+2. Read two CSV files, one containing sales invoice lines and the other containing purchase invoice lines. Each invoice has a timestamp which denotes the transaction date and time.
 3. Check if the product referenced on each sales invoice line has enough inventory.
-	1. If no, do not import the sales invoice to which the line belongs.
-	2. If yes, import the invoice line and update the inventory of the product accordingly.
+  1. If no, do not import the sales invoice to which the line belongs.
+  2. If yes, import the invoice line and update the inventory of the product accordingly.
 4. Print a list of sales invoices listing the problematic line(s) for each invoice.
 
 ## Sample Data
