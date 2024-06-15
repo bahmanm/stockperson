@@ -7,7 +7,7 @@ executors:
   docker:
     resource_class: medium
     docker:
-      - image: bdockerimg/sdkman:opensuse-tumbleweed
+      - image: bdockerimg/sdkman.bmakelib:opensuse-tumbleweed
         environment:
           LANG: "en_US.UTF-8"
 
@@ -29,11 +29,8 @@ jobs:
             | sed 's/\s//'
             | grep '11.*-tem'
             | sort -r
-            | head -n1 > /tmp/java.version
-            && sdk install java $(</tmp/java.version)
-            && zypper --non-interactive refresh
-            && zypper --non-interactive install make perl
-            && rpm --install --nosignature https://github.com/bahmanm/bmakelib/releases/download/v0.7.0/bmakelib-0.7.0-1.1.noarch.rpm
+            | head -n1
+            | xargs -I{} bash -cl 'sdk install java {}'
 
       - checkout
 
@@ -76,11 +73,8 @@ jobs:
             | sed 's/\s//'
             | grep '11.*-tem'
             | sort -r
-            | head -n1 > /tmp/java.version
-            && sdk install java $(</tmp/java.version)
-            && zypper --non-interactive refresh
-            && zypper --non-interactive install make perl
-            && rpm --install --nosignature https://github.com/bahmanm/bmakelib/releases/download/v0.7.0/bmakelib-0.7.0-1.1.noarch.rpm
+            | head -n1
+            | xargs -I{} bash -cl 'sdk install java {}'
 
       - checkout
 
