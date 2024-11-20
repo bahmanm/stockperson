@@ -1,4 +1,9 @@
-# StockPerson [![CircleCI](https://dl.circleci.com/status-badge/img/circleci/UMKeFZ8ns9T9vi5aquTfVT/SMpnX4zqrRqMcDN3Lsw3Wv/tree/main.svg?style=shield&circle-token=9e1ebe32944ff6e34c4f422aece05cd7c16a5654)](https://dl.circleci.com/status-badge/redirect/circleci/UMKeFZ8ns9T9vi5aquTfVT/SMpnX4zqrRqMcDN3Lsw3Wv/tree/main)
+# StockPerson 
+
+[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/UMKeFZ8ns9T9vi5aquTfVT/SMpnX4zqrRqMcDN3Lsw3Wv/tree/main.svg?style=shield&circle-token=9e1ebe32944ff6e34c4f422aece05cd7c16a5654)](https://dl.circleci.com/status-badge/redirect/circleci/UMKeFZ8ns9T9vi5aquTfVT/SMpnX4zqrRqMcDN3Lsw3Wv/tree/main)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/bahmanm/stockperson)
+[![Matrix](https://img.shields.io/matrix/bjforth%3Amatrix.org?server_fqdn=matrix.org&style=flat&logo=matrix&color=%230e80c0)](https://matrix.to/#/#github-bahmanm-stockperson:matrix.org)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 A collection of exercises that you can use to learn a new programming language, or even revisit a
 language you're already familiar with.
