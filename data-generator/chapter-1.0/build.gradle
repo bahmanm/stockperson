@@ -32,7 +32,7 @@ application {
 }
 
 dependencies {
-  implementation platform('org.apache.groovy:groovy-bom:4.0.23')
+  implementation platform('org.apache.groovy:groovy-bom:4.0.24')
   implementation 'org.apache.groovy:groovy'
   implementation 'org.apache.groovy:groovy-dateutil'
   implementation 'org.apache.groovy:groovy-cli-picocli'
