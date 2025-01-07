@@ -6,3 +6,4 @@ build/
 bin/
 .gradle/
 target/
+.idea/
