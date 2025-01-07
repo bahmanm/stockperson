@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class Main {
-  
+
   public static void main(String[] args) throws IOException {
     if (args.length < 5) {
       System.out.println("USAGE: nProducts nCustomers nSuppliers nPurchaseInvoices nSalesInvoices");
