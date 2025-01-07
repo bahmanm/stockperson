@@ -16,11 +16,28 @@
  * You should have received a copy of the GNU General Public License
  * along with StockPerson. If not, see <https://www.gnu.org/licenses/>.
  */
-package datagenerator.chapter_3_0;
+package datagenerator.chapter_3_0.model;
 
-import org.junit.jupiter.api.Test;
+import lombok.Builder;
+import lombok.Getter;
+import org.apache.commons.lang3.RandomStringUtils;
 
-class MainTest {
-  @Test
-  void ignore() {}
+@Getter
+@Builder
+public class Supplier {
+
+  private String name;
+
+  private Supplier(String name) {
+    this.name = name;
+  }
+
+  public static Supplier generate() {
+    return Supplier.builder().name(RandomStringUtils.insecure().nextAlphanumeric(10)).build();
+  }
+
+  @Override
+  public String toString() {
+    return name;
+  }
 }
