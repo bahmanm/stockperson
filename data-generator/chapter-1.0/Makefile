@@ -20,7 +20,6 @@ data-generator.chapter-1.0.gradle(%) :
 .PHONY : data-generator.chapter-1.0.spotlessApply
 
 data-generator.chapter-1.0.spotless-apply : data-generator.chapter-1.0.gradle( spotlessApply )
-data-generator.chapter-1.0.spotless-apply : data-generator.chapter-1.0.gradle( spotlessGroovyGradleApply )
 data-generator.chapter-1.0.spotless-apply : data-generator.chapter-1.0.gradle( spotlessMiscApply )
 
 ####################################################################################################
@@ -28,7 +27,6 @@ data-generator.chapter-1.0.spotless-apply : data-generator.chapter-1.0.gradle( s
 .PHONY : data-generator.chapter-1.0.spotlessCheck
 
 data-generator.chapter-1.0.spotless-check : data-generator.chapter-1.0.gradle( spotlessCheck )
-data-generator.chapter-1.0.spotless-check : data-generator.chapter-1.0.gradle( spotlessGroovyGradleCheck )
 data-generator.chapter-1.0.spotless-check : data-generator.chapter-1.0.gradle( spotlessMiscCheck )
 
 ####################################################################################################

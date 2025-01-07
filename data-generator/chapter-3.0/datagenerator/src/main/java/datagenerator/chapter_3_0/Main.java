@@ -19,14 +19,16 @@
 package datagenerator.chapter_3_0;
 
 import datagenerator.chapter_3_0.model.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class Main {
-  public String getGreeting() {
-    return "Hello World!";
-  }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     if (args.length < 5) {
       System.out.println("USAGE: nProducts nCustomers nSuppliers nPurchaseInvoices nSalesInvoices");
       System.exit(0);
@@ -47,30 +49,54 @@ public class Main {
             .mapToObj((i) -> SalesInvoice.generate(products, customers))
             .toList();
 
-    System.out.print(
-        """
-    # Produced using StockPerson Data Generator (chapter 1.0)
-    # https://github.com/bahmanm/stockperson/
-    # product,qty
-    """);
-    products.forEach(p -> System.out.printf("%s,%.2f\n", p.getCode(), p.getQty()));
-    System.out.println();
+    writeProducts(products);
+    writePurchaseInvoices(purchaseInvoices);
+    writeSalesInvoices(salesInvoices);
+  }
 
-    System.out.print(
+  private static void writeSalesInvoices(List<SalesInvoice> invoices) throws IOException {
+    var writer = new BufferedWriter(new FileWriter(new File("sales-invoices.csv")));
+    writer.write(
+        """
+        # Produced using StockPerson Data Generator (chapter 3.0)
+        # https://github.com/bahmanm/stockperson/
+        # docNo,customer,date,total,discount,lineNo,product,qty,price,lineAmt
+        """);
+    for (var i : invoices) {
+      writer.write(i.toString());
+      writer.newLine();
+    }
+    writer.close();
+  }
+
+  private static void writePurchaseInvoices(List<PurchaseInvoice> invoices) throws IOException {
+    var writer = new BufferedWriter(new FileWriter(new File("purchase-invoices.csv")));
+    writer.write(
         """
     # Produced using StockPerson Data Generator (chapter 3.0)
     # https://github.com/bahmanm/stockperson/
     # docNo,supplier,date,total,discount,lineNo,product,qty,price,lineAmt
     """);
-    purchaseInvoices.forEach(System.out::println);
-    System.out.println();
+    for (var i : invoices) {
+      writer.write(i.toString());
+      writer.newLine();
+    }
+    writer.close();
+  }
 
-    System.out.print(
+  private static void writeProducts(List<Product> products) throws IOException {
+    var writer = new BufferedWriter(new FileWriter(new File("products.csv")));
+    writer.write(
         """
-    # Produced using StockPerson Data Generator (chapter 3.0)
-    # https://github.com/bahmanm/stockperson/
-    # docNo,customer,date,total,discount,lineNo,product,qty,price,lineAmt
-    """);
-    salesInvoices.forEach(System.out::println);
+                      # Produced using StockPerson Data Generator (chapter 3.0)
+                      # https://github.com/bahmanm/stockperson/
+                      # product,qty
+                      """);
+    for (var p : products) {
+      writer.write("%s,%.2f\n".formatted(p.getCode(), p.getQty()));
+    }
+    writer.newLine();
+    writer.flush();
+    writer.close();
   }
 }

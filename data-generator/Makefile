@@ -2,7 +2,7 @@ data-generator.dir.root := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
 ####################################################################################################
 
-data-generator.chapters := 1.0
+data-generator.chapters := 1.0 3.0
 data-generator.chapters.makefiles := $(data-generator.chapters:%=$(data-generator.dir.root)chapter-%/Makefile)
 
 .PHONY : $(data-generator.chapters.makefiles)
